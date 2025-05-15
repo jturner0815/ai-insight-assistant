@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - AI Insight Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fef8e6;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .register-container {
+            max-width: 420px;
+            margin: 100px auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #5a2e0d;
+        }
+
+        .text-link {
+            color: #E67E22;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .text-link:hover {
+            color: #F4A300;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2 class="mb-4 text-center">Create an Account</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" onsubmit="return validatePassword();">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input class="form-control" type="text" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input class="form-control" type="password" name="password" id="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input class="form-control" type="password" id="confirm_password" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a class="text-link" href="{{ url_for('login') }}">Already have an account? Log in here</a>
+        </div>
+    </div>
+
+    <script>
+        function validatePassword() {
+            const pw = document.getElementById('password').value;
+            const cpw = document.getElementById('confirm_password').value;
+            if (pw !== cpw) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

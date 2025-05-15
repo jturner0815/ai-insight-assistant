@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Insight Assistant</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='pattern.png') }}");
+            background-size: 300px;
+            background-color: #FCECC4;
+            font-family: 'Segoe UI', sans-serif;
+            color: #633A11;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-color: rgba(255, 255, 255, 0.6);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        h2 {
+            color: #5a2e0d;
+            font-weight: 700;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: #633A11;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 2px solid #F4A300;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .card-header {
+            background-color: #F4A300;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #E67E22;
+            border-color: #E67E22;
+        }
+
+        .btn-primary:hover {
+            background-color: #F4A300;
+            border-color: #F4A300;
+        }
+
+        .brand-header img {
+            max-height: 80px;
+        }
+
+        .loading {
+            display: none;
+            color: #5a2e0d;
+            font-style: italic;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media print {
+            .btn, .form-label, input, textarea, .lead, .loading, form {
+                display: none !important;
+            }
+            .card {
+                border: none;
+                box-shadow: none;
+            }
+            pre {
+                white-space: pre-wrap;
+                word-break: break-word;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="glass-card text-center">
+            <div class="brand-header mb-3">
+                <img src="{{ url_for('static', filename='logo1.png') }}" alt="Jordan Turner Data Logo" class="mb-2">
+            </div>
+            <h2 class="mb-1">AI Insight Assistant</h2>
+            <p class="lead">Powered by Groq · Designed by Jordan Turner</p>
+
+            <form method="post" enctype="multipart/form-data" class="mt-4">
+                <div class="mb-3 text-start">
+                    <label for="file" class="form-label">Upload CSV File</label>
+                    <input class="form-control" type="file" name="file" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="custom_prompt" class="form-label">Custom Question (optional)</label>
+                    <textarea class="form-control" name="custom_prompt" placeholder="e.g., What are the top 3 trends?" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="showLoading()">Generate Insight</button>
+            </form>
+
+            <p class="loading mt-3" id="loadingText">⏳ Analyzing your data with Groq... Please wait.</p>
+
+            {% if insight %}
+                <div class="card mt-4 text-start">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>AI-Generated Insight</span>
+                        <div>
+                            <a class="btn btn-sm btn-outline-secondary me-2" href="data:text/plain;charset=utf-8,{{ insight | urlencode }}" download="insight.txt">Download TXT</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('static', filename='insight.pdf') }}" download>Download PDF</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <pre>{{ insight }}</pre>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        function showLoading() {
+            document.getElementById('loadingText').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
