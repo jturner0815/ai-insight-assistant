@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ai-insight-assistant
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: GROQ_API_KEY
+        value: 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
+
