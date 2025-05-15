@@ -38,7 +38,7 @@ A secure, branded, client-facing AI insight assistant powered by Groq and built 
 ## 🔧 Local Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-insight-assistant.git
+git clone https://github.com/jturner0815/ai-insight-assistant.git
 cd ai-insight-assistant
 python3 -m venv venv
 source venv/bin/activate
