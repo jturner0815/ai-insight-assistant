@@ -1,0 +1,33 @@
+body {
+    background-color: #FCECC4;
+    background-image: url("../static/pattern.png");
+    background-size: 300px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #633A11;
+}
+
+h2 {
+    color: #E67E22;
+    font-weight: 600;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #F4A300;
+}
+
+.card-header {
+    background-color: #F4A300;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #E67E22;
+    border-color: #E67E22;
+}
+
+.btn-primary:hover {
+    background-color: #F4A300;
+    border-color: #F4A300;
+}
