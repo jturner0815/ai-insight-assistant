@@ -3,7 +3,7 @@
 A secure, branded, client-facing AI insight assistant powered by Groq and built with Flask. This app allows users to upload CSV data, receive AI-generated insights, and download the results in PDF or TXT format — all behind a login system with prompt logging.
 
 ![Render Status](https://render.com/images/icons/favicon.ico) [Live Demo](https://your-live-url.onrender.com)  
-*(Replace with your actual URL)*
+*https://ai-insight-assistant.onrender.com*
 
 ---
 
